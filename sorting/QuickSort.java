@@ -4,48 +4,42 @@ import java.util.Arrays;
 
 public class QuickSort {
 
-    public static int partition(int a[], int low, int hi) {
+  public static int partition(int a[], int low, int hi) {
 
-        int p = a[low];
-        int i = low;
-        int j = hi;
+    int p = a[low];
+    int i = low;
+    int j = hi;
 
-        while (true) {
+    while (true) {
 
-            while (p > a[++i])
-                if (i == hi)
-                    break;
-            while (p < a[--j])
-                if (j == low)
-                    break;
-            if (i >= j)
-                break;
+      while (++i < hi && p > a[i]) if (i == hi) break;
 
-            int val = a[i];
-            a[i] = a[j];
-            a[j] = val;
-        }
-            int val = a[low];
-            a[low] = a[j];
-            a[j] = val;
-            return j;
-        }
-    
+      while (--j > low && p < a[j]) if (j == low) break;
 
-    public static void main(String[] args) {
+      if (i >= j) break;
 
-        int a[] = { 15, 100, 200, 2, 1, 5, 7, 3, 8 };
-        sort(a, 0, a.length);
-        System.out.println(Arrays.toString(a));
-
+      int val = a[i];
+      a[i] = a[j];
+      a[j] = val;
     }
+    int val = a[low];
+    a[low] = a[j];
+    a[j] = val;
+    return j;
+  }
 
-    public static void sort(int a[], int lo, int hi) {
-        if (lo < hi) {
-            int j = partition(a, lo, hi);
-            sort(a, lo, j);
-            sort(a, j , hi);
-        }
+  public static void main(String[] args) {
+
+    int a[] = {15, 100, 200, 2, 1, 5, 7, 3, 8};
+    sort(a, 0, a.length);
+    System.out.println(Arrays.toString(a));
+  }
+
+  public static void sort(int a[], int lo, int hi) {
+    if (lo < hi) {
+      int j = partition(a, lo, hi);
+      sort(a, lo, j);
+      sort(a, j + 1, hi); // index j is already in right position. So leave it further sort by j + 1.
     }
-
+  }
 }
