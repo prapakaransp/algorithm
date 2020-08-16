@@ -15,19 +15,19 @@ public class ShellSort {
 		int n = a.length;
 		// Find H for for sorting
 		int h = 1;
-		// follow 3x + 1rule
+		// follow 3x + 1 rule
 
-		if (h < n / 3)
+		while (h < n / 3)
 			h = 3 * h + 1;
 
 		while (h >= 1) {
 
 			for (int i = h; i < a.length; i++) {
 
-				for (int j = i; j >= h; j -= h) {
-					if (a[i] > a[j - h]) {
-						int val = a[i];
-						a[i] = a[j - h];
+				for (int j = i; j >= h; j -=h) {
+					if (a[j] > a[j - h]) {
+						int val = a[j];
+						a[j] = a[j - h];
 						a[j - h] = val;
 					}
 
