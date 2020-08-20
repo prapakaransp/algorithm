@@ -1,0 +1,11 @@
+1) Sort the point based on Y angle.
+2) Two pointer are same with Y angle and sort nearst x angle.
+3) Create empty stack.
+4) Store p[0], p[1] to stack
+5) for 2 to n 
+    i)Find counter clock vise for p[i]
+            stack.push(p[i])
+      else
+           stack.pop(p[i])
+
+https://github.com/phareskrad/algs4/blob/master/jobinterviewquestions/ElementarySorts.java      
