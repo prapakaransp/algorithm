@@ -57,16 +57,7 @@ public void countElement(Point2d a[], Point2d b)
               j++;
           }
     }
- 
-    if(i < a.length)
-    {
-      count += a.length -i; 
-
-    } else if(j < b.length)
-    {
-        count += b.length - j;
-    }
-}
+ }
 }
 }
 }
