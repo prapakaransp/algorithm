@@ -1,0 +1,52 @@
+package search;
+
+public class BST {
+
+	private Node root;
+
+	private class Node {
+		private int key;
+		private Node left, right;
+
+		private Node(int key) {
+			this.key = key;
+		}
+	}
+
+	public boolean get(int key) {
+		if (root == null)
+			return false;
+
+		while (root != null) {
+			if (root.key == key)
+				return true;
+
+			else if (root.key > key)
+				root = root.left;
+			else
+				root = root.right;
+          }
+      return false;
+	}
+
+  public void put(int key)
+  {
+    	  root= internalPut(root, key);
+  }
+
+  private Node internalPut(Node x, int key)
+  {
+	     if(x == null)
+	      return new Node(key);
+
+	    if(x.key > key)
+	    {
+	    	 x.left = internalPut(x.left, key);
+	    }else
+	    {
+	    	 x.right = internalPut(x.right, key);
+	    }
+	  return root;
+  }
+
+}
