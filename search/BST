@@ -1,16 +1,67 @@
-package search;
+package binarysearch;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BST {
 
 	private Node root;
 
 	private class Node {
-		private int key;
+		private int key, count;
 		private Node left, right;
 
 		private Node(int key) {
 			this.key = key;
 		}
+	}
+
+	public int size() {
+		return size(root);
+	}
+
+	private int size(Node root) {
+		if (root == null)
+			return 0;
+		else
+			return root.count;
+
+	}
+
+	/******** Rank *****/
+	public int rank(int key) {
+		return rank(root, key);
+	}
+
+	private int rank(Node x, int key) {
+		if (x == null)
+			return 0;
+
+		if (x.key == key)
+			return size(x.left);
+		else if (x.key < key)
+			return 1 + size(x) + rank(x.right, key);
+		else if (x.key > key)
+			return rank(x.left, key);
+		return 0;
+
+	}
+
+	/*********** In order traverse *****/
+	public Queue IterableVerify(int key) {
+
+		Queue q = new LinkedList();
+		inorder(root, q);
+		return q;
+
+	}
+
+	private void inorder(Node x, Queue q) {
+		if (x == null)
+			return;
+		inorder(x.left, q);
+		q.add(x.key);
+		inorder(x.right, q);
 	}
 
 	public boolean get(int key) {
@@ -25,28 +76,28 @@ public class BST {
 				root = root.left;
 			else
 				root = root.right;
-          }
-      return false;
+		}
+		return false;
 	}
 
-  public void put(int key)
-  {
-    	  root= internalPut(root, key);
-  }
+	public void put(int key) {
+		root = put(root, key);
+	}
 
-  private Node internalPut(Node x, int key)
-  {
-	     if(x == null)
-	      return new Node(key);
+	private Node put(Node x, int key) {
+		if (x == null)
+			return new Node(key);
 
-	    if(x.key > key)
-	    {
-	    	 x.left = internalPut(x.left, key);
-	    }else
-	    {
-	    	 x.right = internalPut(x.right, key);
-	    }
-	  return root;
-  }
+		if (x.key > key) {
+			x.left = put(x.left, key);
+		} else if (x.key < key) {
+			x.right = put(x.right, key);
+		} else if (x.key == key)
+			x.key = key;
+		// Find a size
+		x.count = 1 + size(x.right) + size(x.left);
+
+		return root;
+	}
 
 }
